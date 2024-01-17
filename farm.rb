@@ -112,17 +112,22 @@ def count_animals
 end
 
 def sell_animals
+  instance_profit=0
   if animals.length==0
     puts "You have no animals to sell, raise some animals!"
   else
     @animals.each do |animal|
       if animal.is_a?(Sheep)
-        @money += Sheep.sale
+        @money += animal.sale
+        instance_profit += animal.sale
       elsif animal.is_a?(Cow)
-        @money += Cow.sale
+        @money += animal.sale
+        instance_profit += animal.sale
       end
     end
+    puts "You have sold all your animals for a total of $#{instance_profit}.00 and your bank is now at $#{@money}.00."
     @animals = []
+    instance_profit=0
   end
 
 end

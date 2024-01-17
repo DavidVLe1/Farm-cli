@@ -13,4 +13,8 @@ class Sheep
   def sound
     puts "Moo! The cow is mooing."
   end
+
+  def self.sale
+    @sale
+  end
 end
