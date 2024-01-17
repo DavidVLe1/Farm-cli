@@ -64,9 +64,9 @@ def count_total_crops
 end
 
 def sell_crops
-  @money += total_crops * 10
+  @money += @total_crops * 10
   puts "you sold #{@total_crops} crops."
-  total_crops = 0
+  @total_crops = 0
 end
 
 def count_money
@@ -79,36 +79,42 @@ def count_money
     puts "You are in the negative, start selling your crops and animals."
   end
 
-  def raise_cow
-    cow_cost = 300
-    @animals << Cow.new(cow_cost)
-    @money -= cow_cost
-    puts "You have spent #{cow_cost} to raise a Cow."
-  end
+  
+end
 
-  def raise_sheep
-    sheep_cost = 100
-    @animals << Sheep.new(sheep_cost)
-    @money -= sheep_cost
-    puts "You have spent #{sheep_cost} to raise a Sheep."
-  end
+def raise_cow
+  cow_cost = 300
+  @animals << Cow.new(cow_cost)
+  @money -= cow_cost
+  puts "You have spent #{cow_cost} to raise a Cow."
+end
 
-  def count_animals
-    sheep_count = 0
-    cow_count = 0
+def raise_sheep
+  sheep_cost = 100
+  @animals << Sheep.new(sheep_cost)
+  @money -= sheep_cost
+  puts "You have spent #{sheep_cost} to raise a Sheep."
+end
 
-    @animals.each do |animal|
-      if animal.is_a?(Sheep)
-        sheep_count += 1
-      elsif animal.is_a?(Cow)
-        cow_count += 1
-      end
+def count_animals
+  sheep_count = 0
+  cow_count = 0
+
+  @animals.each do |animal|
+    if animal.is_a?(Sheep)
+      sheep_count += 1
+    elsif animal.is_a?(Cow)
+      cow_count += 1
     end
-
-    puts "You have #{sheep_count} sheep and #{cow_count} cows in the farm."
   end
 
-  def sell_animals
+  puts "You have #{sheep_count} sheep and #{cow_count} cows in the farm."
+end
+
+def sell_animals
+  if animals.length==0
+    puts "You have no animals to sell, raise some animals!"
+  else
     @animals.each do |animal|
       if animal.is_a?(Sheep)
         @money += Sheep.sale
@@ -116,10 +122,12 @@ def count_money
         @money += Cow.sale
       end
     end
+    @animals = []
   end
 
-  def exit_program
-    puts "Exiting the program. Goodbye!"
-    exit
-  end
+end
+
+def exit_program
+  puts "Exiting the program. Goodbye!"
+  exit
 end
