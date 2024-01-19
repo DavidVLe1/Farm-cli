@@ -53,13 +53,14 @@ class Farm
 
   def grow_crops
     puts "growing crops..."
-    num_crops = rand(0..30)
+    num_crops = rand(1..30)
     puts "you have grown #{num_crops} crops."
     @total_crops += num_crops
   end
 
   def count_total_crops
     puts "You have a total of #{@total_crops} crops."
+    return @total_crops
   end
 
   def sell_crops
@@ -73,10 +74,11 @@ class Farm
     if @money > 0
       puts "You are doing great!"
     elsif @money == 0
-      puts "You should start raising crops or animals"
+      puts "You should start raising crops or animals."
     else
       puts "You are in the negative, start selling your crops and animals."
     end
+    return @money
   end
 
   def raise_cow
@@ -106,6 +108,7 @@ class Farm
     end
 
     puts "You have #{sheep_count} sheep and #{cow_count} cows in the farm."
+    return cow_count+sheep_count
   end
 
   def sell_animals
@@ -126,6 +129,7 @@ class Farm
       @animals = []
       instance_profit = 0
     end
+    return instance_profit
   end
 
   def exit_program
