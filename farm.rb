@@ -50,89 +50,86 @@ class Farm
       end
     end
   end
-end
 
-def grow_crops
-  puts "growing crops..."
-  num_crops = rand(0..30)
-  puts "you have grown #{num_crops} crops."
-  @total_crops += num_crops
-end
-
-def count_total_crops
-  puts "You have a total of #{@total_crops} crops."
-end
-
-def sell_crops
-  @money += @total_crops * 10
-  puts "you sold #{@total_crops} crops."
-  @total_crops = 0
-end
-
-def count_money
-  puts "You have a total of $#{@money}."
-  if @money > 0
-    puts "You are doing great!"
-  elsif @money == 0
-    puts "You should start raising crops or animals"
-  else
-    puts "You are in the negative, start selling your crops and animals."
+  def grow_crops
+    puts "growing crops..."
+    num_crops = rand(0..30)
+    puts "you have grown #{num_crops} crops."
+    @total_crops += num_crops
   end
 
-  
-end
+  def count_total_crops
+    puts "You have a total of #{@total_crops} crops."
+  end
 
-def raise_cow
-  cow_cost = 300
-  @animals << Cow.new(cow_cost)
-  @money -= cow_cost
-  puts "You have spent #{cow_cost} to raise a Cow."
-end
+  def sell_crops
+    @money += @total_crops * 10
+    puts "you sold #{@total_crops} crops."
+    @total_crops = 0
+  end
 
-def raise_sheep
-  sheep_cost = 100
-  @animals << Sheep.new(sheep_cost)
-  @money -= sheep_cost
-  puts "You have spent #{sheep_cost} to raise a Sheep."
-end
-
-def count_animals
-  sheep_count = 0
-  cow_count = 0
-
-  @animals.each do |animal|
-    if animal.is_a?(Sheep)
-      sheep_count += 1
-    elsif animal.is_a?(Cow)
-      cow_count += 1
+  def count_money
+    puts "You have a total of $#{@money}."
+    if @money > 0
+      puts "You are doing great!"
+    elsif @money == 0
+      puts "You should start raising crops or animals"
+    else
+      puts "You are in the negative, start selling your crops and animals."
     end
   end
 
-  puts "You have #{sheep_count} sheep and #{cow_count} cows in the farm."
-end
+  def raise_cow
+    cow_cost = 300
+    @animals << Cow.new(cow_cost)
+    @money -= cow_cost
+    puts "You have spent #{cow_cost} to raise a Cow."
+  end
 
-def sell_animals
-  instance_profit=0
-  if animals.length==0
-    puts "You have no animals to sell, raise some animals!"
-  else
+  def raise_sheep
+    sheep_cost = 100
+    @animals << Sheep.new(sheep_cost)
+    @money -= sheep_cost
+    puts "You have spent #{sheep_cost} to raise a Sheep."
+  end
+
+  def count_animals
+    sheep_count = 0
+    cow_count = 0
+
     @animals.each do |animal|
       if animal.is_a?(Sheep)
-        @money += animal.sale
-        instance_profit += animal.sale
+        sheep_count += 1
       elsif animal.is_a?(Cow)
-        @money += animal.sale
-        instance_profit += animal.sale
+        cow_count += 1
       end
     end
-    puts "You have sold all your animals for a total of $#{instance_profit}.00 and your bank is now at $#{@money}.00."
-    @animals = []
-    instance_profit=0
+
+    puts "You have #{sheep_count} sheep and #{cow_count} cows in the farm."
   end
 
-end
+  def sell_animals
+    instance_profit = 0
+    if animals.length == 0
+      puts "You have no animals to sell, raise some animals!"
+    else
+      @animals.each do |animal|
+        if animal.is_a?(Sheep)
+          @money += animal.sale
+          instance_profit += animal.sale
+        elsif animal.is_a?(Cow)
+          @money += animal.sale
+          instance_profit += animal.sale
+        end
+      end
+      puts "You have sold all your animals for a total of $#{instance_profit}.00 and your bank is now at $#{@money}.00."
+      @animals = []
+      instance_profit = 0
+    end
+  end
 
-def exit_program
-  puts "Exiting the program. Goodbye!"
-  exit
+  def exit_program
+    puts "Exiting the program. Goodbye!"
+    exit
+  end
 end
