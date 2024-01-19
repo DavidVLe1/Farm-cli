@@ -3,6 +3,7 @@ require './farm'
 
 class TestFarm < Minitest::Test
   def test_grow_crops
+    puts "Testing growing crops."
     my_farm=Farm.new
     crops=my_farm.grow_crops
     assert(crops, 'Value should not be nil')
@@ -11,6 +12,7 @@ class TestFarm < Minitest::Test
   end
 
   def test_sell_crops_and_profits
+    puts "Testing selling crops."
     my_farm=Farm.new
     my_farm.grow_crops
     my_farm.sell_crops
@@ -20,6 +22,7 @@ class TestFarm < Minitest::Test
   end
 
   def test_raise_cow
+    puts "Testing raising cow."
     my_farm=Farm.new
     my_farm.raise_cow
     my_farm.raise_cow
@@ -28,17 +31,20 @@ class TestFarm < Minitest::Test
   end
 
   def test_raise_sheep_and_animal_counted
+    puts "Testing raising sheep."
     my_farm=Farm.new
     my_farm.raise_sheep
     assert_equal 1, my_farm.count_animals, "There should be 1 sheep raised since we called it once."
   end
 
   def test_no_initial_animals
+    puts "Testing for empty animal array."
     my_farm=Farm.new
     assert_equal 0, my_farm.count_animals, "There should initially be 0 animals."
   end
 
   def test_sell_animals
+    puts "Testing selling animals."
     my_farm=Farm.new
     my_farm.raise_cow
     assert_equal 1, my_farm.count_animals, "there should be 1 animal at this point."
